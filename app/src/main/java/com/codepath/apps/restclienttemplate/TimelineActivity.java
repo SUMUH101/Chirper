@@ -27,6 +27,7 @@ public class TimelineActivity extends AppCompatActivity {
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
     public static final String TAG = "TimeLineActivity";
+    EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,45 @@ public class TimelineActivity extends AppCompatActivity {
         tweets = new ArrayList<>();
         adapter = new TweetsAdapter(this,tweets);
         //Recycler view setup = layout manager and the adapter
-        rvTweets.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rvTweets.setLayoutManager(layoutManager);
         rvTweets.setAdapter(adapter);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                loadMoreData();
+
+            }
+        };
+        //Add scroll listener to RecyclerView
+        rvTweets.addOnScrollListener(scrollListener);
         populateHomeTimeline();
+    }
+
+    private void loadMoreData() {
+        // 1. Send an API request to retrieve appropriate paginated data
+        client.getNextPageOfTweets(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                // 2. Deserialize and construct new model objects from the API response
+                JSONArray jsonArray = json.jsonArray;
+                try {
+                    // 3. Append the new data objects to the existing set of items inside the array of items
+                    // 4. Notify the adapter of the new items made with `notifyItemRangeInserted()
+                    List<Tweet> tweets = Tweet.fromJsonArray(jsonArray);
+                    adapter.addAll(tweets);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+
+            }
+        },tweets.get(tweets.size() - 1).id);
+
     }
 
     private void populateHomeTimeline() {
