@@ -1,6 +1,6 @@
 # Project 2 - *Simple Tweet*
 
-**Simple Tweet Part 2** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+##**Simple Tweet Part 2** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
 Time spent: **5.5** hours spent in total
 
@@ -43,7 +43,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 I had some issues implementing the icons in the Action bar. Initially they won't appear but then when I finally got the twitter icon to display it was centered instead of to the top left. I plan on fixing these bugs as I continue to add more stretch stories.
 
-**Simple Tweet Part 1** is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+##**Simple Tweet Part 1** is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
 Time spent: **5** hours spent in total
 
