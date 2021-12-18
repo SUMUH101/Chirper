@@ -39,9 +39,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-I had some issues implementing the icons in the Action bar. Initially they won't appear but then when I finally got the twitter icon to display it was centered instead of to the top left. I plan on fixing these bugs as I continue to add more stretch stories.
+I had some issues placing the icons in the Action bar (App bar). Initially the twitter icon wasn't appearing but then after tinkering with it for a while I managed to get it to display. Unfortunately, the positioning is still a bit off. I plan on fixing these bugs as I continue adding more stretch stories.
 
-##Chirper Part 1
+## Chirper Part 1
 
 Time spent: **5** hours spent in total
 
