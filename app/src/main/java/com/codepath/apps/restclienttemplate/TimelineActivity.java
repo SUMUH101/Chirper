@@ -1,19 +1,30 @@
 package com.codepath.apps.restclienttemplate;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +39,30 @@ public class TimelineActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeContainer;
     public static final String TAG = "TimeLineActivity";
     EndlessRecyclerViewScrollListener scrollListener;
+    private final int REQUEST_CODE = 20;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#1DA1F2"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+        //actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayOptions(actionBar.DISPLAY_SHOW_HOME | actionBar.DISPLAY_SHOW_TITLE);
+        actionBar.setIcon(R.drawable.ic_twittericon2);
+        actionBar.setTitle("");
+
+
+        //actionBar.setIcon(getDrawable(R.drawable.ic_action_name));
+
+
+
 
         client = TwitterApp.getRestClient(this);
 
@@ -97,6 +127,41 @@ public class TimelineActivity extends AppCompatActivity {
             }
         },tweets.get(tweets.size() - 1).id);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.compose){
+            //Compose icon has been selected
+            //Navigate to the compose activity
+            Intent intent = new Intent(this,ComposeActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+            //Get data from the intent (tweet)
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
+            //Update the Recycler View with the tweet
+            //Modify the data source of tweets
+            tweets.add(0,tweet);
+            //Update the Adapter
+            adapter.notifyItemInserted(0);
+            rvTweets.smoothScrollToPosition(0);
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void populateHomeTimeline() {
