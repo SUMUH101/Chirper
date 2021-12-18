@@ -77,7 +77,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+There were little to no issues with the first portion of this project
 
 ## Open-source libraries used
 
