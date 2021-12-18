@@ -1,6 +1,8 @@
-# Project 2 - *Simple Tweet*
+# Project 2 - *Chirper*
 
-##**Simple Tweet Part 2** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+**Chirper** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+
+## Chirper Part 2
 
 Time spent: **5.5** hours spent in total
 
@@ -27,10 +29,6 @@ The following **optional** features are implemented:
 - [ ] When a user leaves the compose view without publishing and there is existing text, prompt to save or delete the draft. If saved, the draft should then be **persisted to disk** and can later be resumed from the compose view.
 - [ ] Enable your app to receive implicit intents from other apps. When a link is shared from a web browser, it should pre-fill the text and title of the web page when composing a tweet. 
 
-The following **additional** features are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality!
-
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
@@ -43,7 +41,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 I had some issues implementing the icons in the Action bar. Initially they won't appear but then when I finally got the twitter icon to display it was centered instead of to the top left. I plan on fixing these bugs as I continue to add more stretch stories.
 
-##**Simple Tweet Part 1** is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+##Chirper Part 1
 
 Time spent: **5** hours spent in total
 
